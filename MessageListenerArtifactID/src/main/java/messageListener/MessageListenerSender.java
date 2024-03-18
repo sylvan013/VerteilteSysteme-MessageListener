@@ -22,20 +22,16 @@ public class MessageListenerSender {
 	
 	// Connect to Message-Broker
 	public void connectToMessageBroker() throws Exception {
-		Properties props = new Properties();
-		props.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
-		props.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
-		initialContext = new InitialContext(props);
+	    Properties props = new Properties();
+	    props.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
+	    props.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
+	    initialContext = new InitialContext(props);
 
-		initialContext = new InitialContext();
-
-        connectionFactory = (ConnectionFactory)
-                initialContext.lookup("/ConnectionFactory");
-
-        connection = connectionFactory.createConnection();
-
-        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+	    connectionFactory = (ConnectionFactory) initialContext.lookup("ConnectionFactory");
+	    connection = connectionFactory.createConnection();
+	    session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 	}
+
 	
 	// Access Point-To-Point Queue
 	public void accessPointToPointQueue() throws Exception {
