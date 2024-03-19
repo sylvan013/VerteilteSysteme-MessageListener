@@ -29,7 +29,7 @@ public class MessageListenerSender {
         initialContext = new InitialContext(properties);
 
         connectionFactory = (ConnectionFactory) initialContext.lookup("ConnectionFactory");
-
+        
         connection = connectionFactory.createConnection();
 
         session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);

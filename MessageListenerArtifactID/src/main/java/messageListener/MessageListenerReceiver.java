@@ -1,6 +1,9 @@
 package messageListener;
 
 import javax.naming.*;
+
+import java.util.Properties;
+
 import javax.jms.*;
 
 public class MessageListenerReceiver {
@@ -19,9 +22,14 @@ public class MessageListenerReceiver {
 
 	// Connect to Message-Broker
 	public void connectToMessageBroker() throws Exception {
-		initialContext = new InitialContext();
+		Properties properties = new Properties();
+		properties.setProperty(Context.INITIAL_CONTEXT_FACTORY,
+				"org.apache.activemq.jndi.ActiveMQInitialContextFactory");
+		properties.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
 
-		connectionFactory = (ConnectionFactory) initialContext.lookup("/ConnectionFactory");
+		initialContext = new InitialContext(properties);
+
+		connectionFactory = (ConnectionFactory) initialContext.lookup("ConnectionFactory");
 
 		connection = connectionFactory.createConnection();
 
