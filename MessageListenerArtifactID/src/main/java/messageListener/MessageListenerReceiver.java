@@ -86,13 +86,11 @@ public class MessageListenerReceiver {
 
 		messageListenerReceiver.connectToMessageBroker();
 		messageListenerReceiver.accessPointToPointQueue();
-		// messageListenerReceiver.accessTopicQueue();
+		messageListenerReceiver.accessTopicQueue();
 		messageListenerReceiver.connection.start();
-		while (true) {
-			messageListenerReceiver.getAndPrintQueueMessage();
-			// messageListenerReceiver.getAndPrintTopicMessage();
-		}
+		messageListenerReceiver.getAndPrintQueueMessage();
+		messageListenerReceiver.getAndPrintTopicMessage();
+		messageListenerReceiver.closeConnections();
 		
-		// messageListenerReceiver.closeConnections();
 	}
 }
