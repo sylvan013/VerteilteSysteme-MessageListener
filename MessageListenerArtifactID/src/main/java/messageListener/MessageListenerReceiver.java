@@ -38,34 +38,39 @@ public class MessageListenerReceiver {
 
 	// Access Point-To-Point Queue
 	public void accessPointToPointQueue() throws Exception {
-		queue = (Queue) initialContext.lookup("/queue/ExampleQueue");
+		queue = (Queue) initialContext.lookup("dynamicQueues/ExampleQueue");
 		queueConsumer = session.createConsumer(queue);
 	}
 
 	// Access Topic-Orientated Queue
 	public void accessTopicQueue() throws Exception {
-		topic = (Topic) initialContext.lookup("/topic/ExampleTopic");
+		topic = (Topic) initialContext.lookup("dynamicTopics/ExampleTopic");
 		topicConsumer = session.createConsumer(topic);
 	}
 
 	// Get Messages and Print them Out
-	public void getAndPrintMessages() throws Exception {
-		TextMessage message0 = (TextMessage) queueConsumer.receive();
-		TextMessage message1 = (TextMessage) topicConsumer.receive();
-
+	public void getAndPrintQueueMessage() throws Exception {
 		queueConsumer.setMessageListener(new MessageListener() {
-
 			@Override
 			public void onMessage(Message message) {
-				System.out.println(message);
+				try {
+					System.out.println("Queue Message: " + ((TextMessage) message).getText());
+				} catch (JMSException e) {
+					e.printStackTrace();
+				}
 			}
 		});
-
+	}
+	
+	public void getAndPrintTopicMessage() throws Exception {
 		topicConsumer.setMessageListener(new MessageListener() {
-
 			@Override
 			public void onMessage(Message message) {
-				System.out.println(message);
+				try {
+					System.out.println("Topic Message: " + ((TextMessage) message).getText());
+				} catch (JMSException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
@@ -81,9 +86,13 @@ public class MessageListenerReceiver {
 
 		messageListenerReceiver.connectToMessageBroker();
 		messageListenerReceiver.accessPointToPointQueue();
-		messageListenerReceiver.accessTopicQueue();
-		messageListenerReceiver.getAndPrintMessages();
-		messageListenerReceiver.closeConnections();
+		// messageListenerReceiver.accessTopicQueue();
+		messageListenerReceiver.connection.start();
+		while (true) {
+			messageListenerReceiver.getAndPrintQueueMessage();
+			// messageListenerReceiver.getAndPrintTopicMessage();
+		}
+		
+		// messageListenerReceiver.closeConnections();
 	}
-
 }

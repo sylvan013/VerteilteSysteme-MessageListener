@@ -69,7 +69,6 @@ public class MessageListenerSender {
 
 	public static void main(String[] args) throws Exception {
 		MessageListenerSender messageListenerSender = new MessageListenerSender();
-
 		messageListenerSender.connectToMessageBroker();
 		messageListenerSender.accessPointToPointQueue();
 		messageListenerSender.accessTopicQueue();
