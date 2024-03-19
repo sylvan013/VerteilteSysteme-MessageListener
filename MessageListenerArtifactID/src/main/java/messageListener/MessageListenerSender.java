@@ -25,7 +25,7 @@ public class MessageListenerSender {
 		Properties properties = new Properties();
         properties.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
         properties.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
-
+        
         initialContext = new InitialContext(properties);
 
         connectionFactory = (ConnectionFactory) initialContext.lookup("ConnectionFactory");
@@ -37,13 +37,13 @@ public class MessageListenerSender {
 
 	// Access Point-To-Point Queue
 	public void accessPointToPointQueue() throws Exception {
-		queue = (Queue) initialContext.lookup("/queue/ExampleQueue");
+		queue = (Queue) initialContext.lookup("dynamicQueues/ExampleQueue");
 		queueMessageProducer = session.createProducer(queue);
 	}
 
 	// Access Topic-Orientated Queue
 	public void accessTopicQueue() throws Exception {
-		topic = (Topic) initialContext.lookup("/topic/ExampleTopic");
+		topic = (Topic) initialContext.lookup("dynamicTopics/ExampleTopic");
 		topicMessageProducer = session.createProducer(topic);
 	}
 
