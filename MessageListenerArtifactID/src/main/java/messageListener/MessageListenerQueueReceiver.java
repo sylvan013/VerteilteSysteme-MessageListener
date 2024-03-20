@@ -26,6 +26,7 @@ public class MessageListenerQueueReceiver {
         connectionFactory = (ConnectionFactory) initialContext.lookup("ConnectionFactory");
 
         connection = connectionFactory.createConnection();
+        connection.start();
 
         session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
     }
@@ -36,13 +37,13 @@ public class MessageListenerQueueReceiver {
         queueConsumer = session.createConsumer(queue);
     }
 
-    // Get Messages and Print them Out
+    // Get messages and print them out
     public void getAndPrintQueueMessage() throws Exception {
         queueConsumer.setMessageListener(new MessageListener() {
             @Override
             public void onMessage(Message message) {
                 try {
-                    System.out.println("Queue Message: " + ((TextMessage) message).getText());
+                    System.out.println(((TextMessage) message).getText());
                 } catch (JMSException e) {
                     e.printStackTrace();
                 }
@@ -52,10 +53,8 @@ public class MessageListenerQueueReceiver {
 
     public static void main(String[] args) throws Exception {
         MessageListenerQueueReceiver messageListenerReceiver = new MessageListenerQueueReceiver();
-
         messageListenerReceiver.connectToMessageBroker();
-        messageListenerReceiver.accessPointToPointQueue();
-        messageListenerReceiver.connection.start();
+        messageListenerReceiver.accessPointToPointQueue();;
         messageListenerReceiver.getAndPrintQueueMessage();
     }
 }

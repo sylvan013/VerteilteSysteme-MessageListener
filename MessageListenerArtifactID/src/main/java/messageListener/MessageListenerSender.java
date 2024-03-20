@@ -1,9 +1,7 @@
 package messageListener;
 
 import javax.naming.*;
-
 import java.util.Properties;
-
 import javax.jms.*;
 
 public class MessageListenerSender {
@@ -16,9 +14,6 @@ public class MessageListenerSender {
 
 	Queue queue;
 	MessageProducer queueMessageProducer;
-
-	Topic topic;
-	MessageProducer topicMessageProducer;
 
 	// Connect to Message-Broker
 	public void connectToMessageBroker() throws Exception {
@@ -41,21 +36,12 @@ public class MessageListenerSender {
 		queueMessageProducer = session.createProducer(queue);
 	}
 
-	// Access Topic-Orientated Queue
-	public void accessTopicQueue() throws Exception {
-		topic = (Topic) initialContext.lookup("dynamicTopics/ExampleTopic");
-		topicMessageProducer = session.createProducer(topic);
-	}
 
 	// Send Messages
 	public void sendMessages() throws Exception {
-		Message message0 = session.createTextMessage("Hello World!");
-		queueMessageProducer.send(message0);
+		Message message = session.createTextMessage("Hello World!");
+		queueMessageProducer.send(message);
 		System.out.println("queue message sent");
-
-		Message message1 = session.createTextMessage("Goodbye World!");
-		topicMessageProducer.send(message1);
-		System.out.println("topic message sent");
 	}
 
 	// Close all Connections
@@ -73,7 +59,6 @@ public class MessageListenerSender {
 		MessageListenerSender messageListenerSender = new MessageListenerSender();
 		messageListenerSender.connectToMessageBroker();
 		messageListenerSender.accessPointToPointQueue();
-		messageListenerSender.accessTopicQueue();
 		messageListenerSender.sendMessages();
 		messageListenerSender.closeConnections();
 	}
