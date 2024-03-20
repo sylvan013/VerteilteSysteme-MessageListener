@@ -51,9 +51,11 @@ public class MessageListenerSender {
 	public void sendMessages() throws Exception {
 		Message message0 = session.createTextMessage("Hello World!");
 		queueMessageProducer.send(message0);
+		System.out.println("queue message sent");
 
 		Message message1 = session.createTextMessage("Goodbye World!");
 		topicMessageProducer.send(message1);
+		System.out.println("topic message sent");
 	}
 
 	// Close all Connections
