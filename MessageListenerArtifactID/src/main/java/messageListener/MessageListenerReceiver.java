@@ -53,6 +53,7 @@ public class MessageListenerReceiver {
 		queueConsumer.setMessageListener(new MessageListener() {
 			@Override
 			public void onMessage(Message message) {
+				System.out.println(message);
 				try {
 					System.out.println("Queue Message: " + ((TextMessage) message).getText());
 				} catch (JMSException e) {
@@ -63,12 +64,16 @@ public class MessageListenerReceiver {
 	}
 	
 	public void getAndPrintTopicMessage() throws Exception {
+		System.out.println("AAAAAAAAA");
 		topicConsumer.setMessageListener(new MessageListener() {
 			@Override
 			public void onMessage(Message message) {
+				System.out.println(message);
 				try {
-					System.out.println("Topic Message: " + ((TextMessage) message).getText());
-				} catch (JMSException e) {
+					System.out.println("BBBB");
+					System.out.println("Topic Message: " + message.toString());
+					System.out.println("AAAA");
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
