@@ -1,8 +1,15 @@
 package messageListener;
 
-import javax.naming.*;
 import java.util.Properties;
-import javax.jms.*;
+
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.Message;
+import javax.jms.MessageProducer;
+import javax.jms.Queue;
+import javax.jms.Session;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 
 public class MessageListenerSender {
 
