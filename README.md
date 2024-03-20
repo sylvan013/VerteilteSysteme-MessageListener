@@ -1,21 +1,5 @@
 # Verteilte Systeme: MessageListener
 
-### Gruppe 6:
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Kürzel</th>
-  </tr>
-  <tr>
-    <td>Kai Keppler</td>
-    <td>wi22234</td>
-  </tr>
-  <tr>
-    <td>Edona Lokaj</td>
-    <td>wi22108</td>
-  </tr>
-</table>
-
 ## Setup für das Projekt
 Damit das Projekt funktioniert, muss noch ActiveMQ als Message Broker aufgesetzt werden. <br>
 Anstatt zu installieren kann man das auch einfach über Docker laufen lassen.
