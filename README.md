@@ -22,7 +22,7 @@ Die Standard Login-Daten sind:
 Nötig ist das aber nicht.
 
 ### Projekt verwenden
-1. Die beiden Receiver starten: [Queue Reciver](MessageListenerArtifactID/src/main/java/messageListener/MessageListenerQueueReceiver.java), [Topic Receiver](MessageListenerArtifactID/src/main/java/messageListener/MessageListenerTopicReceiver.java)
+1. Den Receiver starten: [Queue Reciver](MessageListenerArtifactID/src/main/java/messageListener/MessageListenerQueueReceiver.java)
 2. Den Sender starten: [Sender](MessageListenerArtifactID/src/main/java/messageListener/MessageListenerSender.java)
 
-Jedes mal, wenn der Sender gestartet wird, empfangen die beiden Receiver die Nachricht, die gesendet wurde.
+Jedes mal, wenn der Sender gestartet wird, empfängt Receiver die Nachricht, die gesendet wurde.
